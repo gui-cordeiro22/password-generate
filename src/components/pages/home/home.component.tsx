@@ -1,10 +1,22 @@
 // Dependencies
-import { FunctionComponent } from "react";
+import { Fragment, FunctionComponent } from "react";
 
-export const Home: FunctionComponent = () => {
+// Types
+import { HomeProps } from "./home.types";
+
+export const Home: FunctionComponent<HomeProps> = ({
+    headerSectionCompositions,
+    passwordVisualizerCompositions,
+    customPasswordOptionsCompositions,
+    copyPasswordButtonCompositions,
+}) => {
     return (
-        <div>
+        <Fragment>
             <h1>Password Generator</h1>
-        </div>
+            {headerSectionCompositions}
+            {passwordVisualizerCompositions}
+            {customPasswordOptionsCompositions}
+            {copyPasswordButtonCompositions}
+        </Fragment>
     );
 };
