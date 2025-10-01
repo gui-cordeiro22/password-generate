@@ -7,6 +7,8 @@ import { Header } from "../../components/sections/header";
 import { InputRange, InputText } from "../../components/elements/input";
 import { Button } from "../../components/elements/button";
 import { ProgressBar } from "../../components/elements/progress-bar";
+import { CustomPasswordOptions } from "../../components/sections/custom-password-options";
+import { Checkbox } from "../../components/elements/checkbox";
 
 // Assets
 import { Copy, RefreshCcw } from "lucide-react";
@@ -15,8 +17,8 @@ import { Copy, RefreshCcw } from "lucide-react";
 import { usePasswordGenerate } from "../../hooks/use-password-generate";
 
 // Utils
+import { data } from "./home.data";
 import { copyToClipboard } from "../../utils/copy";
-import { CustomPasswordOptions } from "../../components/sections/custom-password-options";
 
 export const HomePage: FunctionComponent = () => {
     const [passwordLength, setPasswordLength] = useState<number>(16);
@@ -35,9 +37,7 @@ export const HomePage: FunctionComponent = () => {
 
     return (
         <Home
-            headerSectionCompositions={
-                <Header title="Gerador de senha" description="Utilize o nosso gerador online para criar uma senha forte e segura." />
-            }
+            headerSectionCompositions={<Header title={data.headerSection.title} description={data.headerSection.description} />}
             passwordVisualizerCompositions={
                 <InputText
                     value={generatedPassword}
@@ -48,13 +48,15 @@ export const HomePage: FunctionComponent = () => {
             }
             customPasswordOptionsCompositions={
                 <CustomPasswordOptions
-                    title="Personalizar"
-                    passwordLengthLabel={`Tamanho: ${passwordLength}`}
+                    title={data.customPasswordOptionsSection.title}
+                    passwordLengthLabel={`${data.customPasswordOptionsSection.passwordLengthLabel} ${passwordLength}`}
                     inputRangeElementCompositions={<InputRange handleChange={handleRangeChange} defaultValue={passwordLength} />}
-                    optionsElements={<>Opções de senha</>}
+                    optionsElements={data.customPasswordOptionsSection.passwordOptions.map((option, index) => (
+                        <Checkbox label={option.label} key={`option-${index}`} />
+                    ))}
                 />
             }
-            copyPasswordButtonCompositions={<Button label="Copiar senha" handleClick={() => copyToClipboard(generatedPassword)} />}
+            copyPasswordButtonCompositions={<Button label={data.actionButtons.label} handleClick={() => copyToClipboard(generatedPassword)} />}
         />
     );
 };

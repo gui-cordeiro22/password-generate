@@ -52,3 +52,27 @@ export const ButtonsWrapper = styled.div`
         cursor: pointer;
     }
 `;
+
+export const InputRangeElement = styled.input`
+    appearance: none;
+    height: 10px;
+    background-color: #dddddd;
+    outline: none;
+    border-radius: 8px;
+    width: 100%;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+
+    &:hover {
+        opacity: 1;
+    }
+
+    &::-webkit-slider-thumb {
+        appearance: none;
+        width: 25px;
+        height: 25px;
+        border-radius: 25px;
+        background-color: #9b51e0;
+        cursor: pointer;
+    }
+`;

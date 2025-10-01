@@ -57,7 +57,7 @@ export const Title = styled.h2`
 export const Divider = styled.div`
     height: 1px;
     width: 100%;
-    background-color: #e0e0e0;
+    background-color: #f0f0f0;
 `;
 
 export const Label = styled.p`
