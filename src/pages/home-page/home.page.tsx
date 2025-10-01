@@ -6,15 +6,16 @@ import { Home } from "../../components/pages/home";
 import { Header } from "../../components/sections/header";
 import { InputRange, InputText } from "../../components/elements/input";
 import { Button } from "../../components/elements/button";
+import { ProgressBar } from "../../components/elements/progress-bar";
 
 // Assets
+import { Copy, RefreshCcw } from "lucide-react";
 
 // Hooks
 import { usePasswordGenerate } from "../../hooks/use-password-generate";
 
 // Utils
 import { copyToClipboard } from "../../utils/copy";
-import { Copy, RefreshCcw } from "lucide-react";
 
 export const HomePage: FunctionComponent = () => {
     const [passwordLength, setPasswordLength] = useState<number>(16);
@@ -42,6 +43,7 @@ export const HomePage: FunctionComponent = () => {
                         value={generatedPassword}
                         copyButtonElementCompositions={<Copy onClick={() => copyToClipboard(generatedPassword)} />}
                         regenerateButtonElementCompositions={<RefreshCcw onClick={() => handlePasswordGenerate(passwordLength)} />}
+                        progressBarElementCompositions={<ProgressBar />}
                     />
 
                     <InputRange handleChange={handleRangeChange} defaultValue={passwordLength} />

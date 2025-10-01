@@ -8,6 +8,7 @@ export type InputTextData = {
 export type InputTextElements = {
     copyButtonElementCompositions: ReactNode;
     regenerateButtonElementCompositions: ReactNode;
+    progressBarElementCompositions: ReactNode;
 };
 
 export type InputTextProps = InputTextData & InputTextElements;

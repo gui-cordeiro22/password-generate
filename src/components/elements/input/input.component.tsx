@@ -7,7 +7,12 @@ import { ButtonsWrapper, InputTextContainer, InputTextElement, InputTextWrapper 
 // Types
 import { InputRangeProps, InputTextProps } from "./input.types";
 
-export const InputText: FunctionComponent<InputTextProps> = ({ value, copyButtonElementCompositions, regenerateButtonElementCompositions }) => {
+export const InputText: FunctionComponent<InputTextProps> = ({
+    value,
+    copyButtonElementCompositions,
+    regenerateButtonElementCompositions,
+    progressBarElementCompositions,
+}) => {
     return (
         <InputTextContainer>
             <InputTextWrapper>
@@ -19,6 +24,8 @@ export const InputText: FunctionComponent<InputTextProps> = ({ value, copyButton
                     {regenerateButtonElementCompositions}
                 </ButtonsWrapper>
             </InputTextWrapper>
+
+            {progressBarElementCompositions}
         </InputTextContainer>
     );
 };

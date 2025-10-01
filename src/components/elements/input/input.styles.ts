@@ -9,6 +9,7 @@ export const InputTextContainer = styled.div`
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
+    position: relative;
     background-color: #fff;
     box-shadow: 0px 1px 2px rgba(132, 148, 165, 0.2);
     border-radius: 8px;
