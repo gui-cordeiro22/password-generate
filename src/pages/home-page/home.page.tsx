@@ -10,14 +10,18 @@ import { Button } from "../../components/elements/button";
 // Hooks
 import { usePasswordGenerate } from "../../hooks/use-password-generate";
 
+// Utils
+import { copyToClipboard } from "../../utils/copy";
+
 export const HomePage: FunctionComponent = () => {
-    const [passwordLength, setPasswordLength] = useState<number>();
+    const [passwordLength, setPasswordLength] = useState<number>(16);
 
     const { handlePasswordGenerate, generatedPassword } = usePasswordGenerate();
 
     const handleRangeChange = (value: number) => {
         setPasswordLength(value);
-        console.log("Password length:", value);
+
+        handlePasswordGenerate(value);
     };
 
     return (
@@ -33,14 +37,7 @@ export const HomePage: FunctionComponent = () => {
                 </Fragment>
             }
             customPasswordOptionsCompositions={<div>Custom Password Options</div>}
-            copyPasswordButtonCompositions={
-                <Button
-                    label="Copiar senha"
-                    handleClick={() => {
-                        handlePasswordGenerate(passwordLength);
-                    }}
-                />
-            }
+            copyPasswordButtonCompositions={<Button label="Copiar senha" handleClick={() => copyToClipboard(generatedPassword)} />}
         />
     );
 };

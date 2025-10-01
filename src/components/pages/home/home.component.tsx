@@ -12,7 +12,6 @@ export const Home: FunctionComponent<HomeProps> = ({
 }) => {
     return (
         <Fragment>
-            <h1>Password Generator</h1>
             {headerSectionCompositions}
             {passwordVisualizerCompositions}
             {customPasswordOptionsCompositions}
