@@ -1,5 +1,5 @@
 // Dependencies
-import { Fragment, FunctionComponent, useState } from "react";
+import { Fragment, FunctionComponent, useEffect, useState } from "react";
 
 // Components
 import { Home } from "../../components/pages/home";
@@ -7,11 +7,14 @@ import { Header } from "../../components/sections/header";
 import { InputRange, InputText } from "../../components/elements/input";
 import { Button } from "../../components/elements/button";
 
+// Assets
+
 // Hooks
 import { usePasswordGenerate } from "../../hooks/use-password-generate";
 
 // Utils
 import { copyToClipboard } from "../../utils/copy";
+import { Copy, RefreshCcw } from "lucide-react";
 
 export const HomePage: FunctionComponent = () => {
     const [passwordLength, setPasswordLength] = useState<number>(16);
@@ -24,6 +27,10 @@ export const HomePage: FunctionComponent = () => {
         handlePasswordGenerate(value);
     };
 
+    useEffect(() => {
+        handlePasswordGenerate(passwordLength);
+    }, []);
+
     return (
         <Home
             headerSectionCompositions={
@@ -31,7 +38,11 @@ export const HomePage: FunctionComponent = () => {
             }
             passwordVisualizerCompositions={
                 <Fragment>
-                    <InputText value={generatedPassword} />
+                    <InputText
+                        value={generatedPassword}
+                        copyButtonElementCompositions={<Copy onClick={() => copyToClipboard(generatedPassword)} />}
+                        regenerateButtonElementCompositions={<RefreshCcw onClick={() => handlePasswordGenerate(passwordLength)} />}
+                    />
 
                     <InputRange handleChange={handleRangeChange} defaultValue={passwordLength} />
                 </Fragment>

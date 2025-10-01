@@ -17,12 +17,6 @@ export const pageGutter = css`
     }
 
     @media (min-width: 1366px) {
-        max-width: 1226px;
         padding: 80px 76px;
-    }
-    padding: 80px 76px;
-
-    @media (min-width: 1920px) {
-        max-width: 1440px;
     }
 `;

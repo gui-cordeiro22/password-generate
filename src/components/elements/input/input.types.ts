@@ -1,11 +1,16 @@
 // Types
-import { Ref } from "react";
+import { ReactNode, Ref } from "react";
 
 export type InputTextData = {
     value: string;
 };
 
-export type InputTextProps = InputTextData;
+export type InputTextElements = {
+    copyButtonElementCompositions: ReactNode;
+    regenerateButtonElementCompositions: ReactNode;
+};
+
+export type InputTextProps = InputTextData & InputTextElements;
 
 export type InputRangeData = {
     ref?: Ref<HTMLInputElement>;

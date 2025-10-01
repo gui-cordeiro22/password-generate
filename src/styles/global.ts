@@ -21,6 +21,7 @@ export const GlobalStyle = createGlobalStyle`
     padding: 0;
     outline: 0;
     border: 0;
+    font-family: "Inter", sans-serif;
   }
 
   *:focus {
