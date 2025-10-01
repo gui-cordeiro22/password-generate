@@ -1,10 +1,13 @@
 // Dependencies
 import { FunctionComponent } from "react";
 
-export const InputText: FunctionComponent = () => {
-    return <input type="text" />;
+// Types
+import { InputRangeProps, InputTextProps } from "./input.types";
+
+export const InputText: FunctionComponent<InputTextProps> = ({ value }) => {
+    return <input type="text" defaultValue={value} />;
 };
 
-export const InputRange: FunctionComponent = () => {
-    return <input type="range" value={16} min={4} max={64} />;
+export const InputRange: FunctionComponent<InputRangeProps> = ({ ref, handleChange: onChange, defaultValue = 8 }) => {
+    return <input ref={ref} type="range" min="4" max="64" defaultValue={defaultValue} onChange={(e) => onChange?.(Number(e.target.value))} />;
 };
