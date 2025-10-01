@@ -20,5 +20,5 @@ export const BarElement = styled.div<BarElementStyleProps>`
     border-radius: 0 8px 8px 8px;
     background-color: #4caf50;
     width: 80%;
-    transition: all 0.2s ease-in-out;
+    transition: all 0.3s ease-in-out;
 `;

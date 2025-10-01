@@ -37,7 +37,7 @@ export const InputTextElement = styled.input`
     cursor: default;
     height: 52px;
     width: 100%;
-    transition: all 0.2s ease-in-out;
+    transition: all 0.3s ease-in-out;
     user-select: none;
 `;
 
@@ -61,7 +61,7 @@ export const InputRangeElement = styled.input`
     border-radius: 8px;
     width: 100%;
     opacity: 0.7;
-    transition: opacity 0.2s;
+    transition: opacity 0.3s;
 
     &:hover {
         opacity: 1;

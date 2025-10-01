@@ -11,7 +11,7 @@ import { CustomPasswordOptions } from "../../components/sections/custom-password
 import { Checkbox } from "../../components/elements/checkbox";
 
 // Assets
-import { Copy, RefreshCcw } from "lucide-react";
+import { Check, Copy, RefreshCcw } from "lucide-react";
 
 // Hooks
 import { usePasswordGenerate } from "../../hooks/use-password-generate";
@@ -22,6 +22,7 @@ import { copyToClipboard } from "../../utils/copy";
 
 export const HomePage: FunctionComponent = () => {
     const [passwordLength, setPasswordLength] = useState<number>(16);
+    const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
 
     const { handlePasswordGenerate, generatedPassword } = usePasswordGenerate();
 
@@ -29,6 +30,10 @@ export const HomePage: FunctionComponent = () => {
         setPasswordLength(value);
 
         handlePasswordGenerate(value);
+    };
+
+    const handleCheckboxChange = (value: string) => {
+        setSelectedOptions((prev) => (prev.includes(value) ? prev.filter((v) => v !== value) : [...prev, value]));
     };
 
     useEffect(() => {
@@ -52,7 +57,16 @@ export const HomePage: FunctionComponent = () => {
                     passwordLengthLabel={`${data.customPasswordOptionsSection.passwordLengthLabel} ${passwordLength}`}
                     inputRangeElementCompositions={<InputRange handleChange={handleRangeChange} defaultValue={passwordLength} />}
                     optionsElements={data.customPasswordOptionsSection.passwordOptions.map((option, index) => (
-                        <Checkbox label={option.label} key={`option-${index}`} />
+                        <Checkbox
+                            label={option.label}
+                            key={`option-${index}`}
+                            value={option.label}
+                            checked={selectedOptions.includes(option.label)}
+                            checkedIconElement={<Check size={10} color="#fff" />}
+                            handleChange={() => {
+                                handleCheckboxChange(option.label);
+                            }}
+                        />
                     ))}
                 />
             }
