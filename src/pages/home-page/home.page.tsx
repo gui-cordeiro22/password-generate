@@ -51,7 +51,7 @@ export const HomePage: FunctionComponent = () => {
 
     useEffect(() => {
         handlePasswordGenerate(passwordLength, passwordChars);
-    }, [passwordChars, securityPercent]);
+    }, [passwordChars, passwordLength, handlePasswordGenerate]);
 
     return (
         <Home

@@ -8,7 +8,6 @@ import { BarElement, Container } from "./progress-bar.styles";
 import { ProgressBarProps } from "./progress-bar.types";
 
 export const ProgressBar: FunctionComponent<ProgressBarProps> = ({ percent }) => {
-    console.log(percent);
     return (
         <Container>
             <BarElement percent={percent} />
