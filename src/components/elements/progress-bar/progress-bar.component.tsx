@@ -4,10 +4,14 @@ import { FunctionComponent } from "react";
 // Styles
 import { BarElement, Container } from "./progress-bar.styles";
 
-export const ProgressBar: FunctionComponent = () => {
+// Types
+import { ProgressBarProps } from "./progress-bar.types";
+
+export const ProgressBar: FunctionComponent<ProgressBarProps> = ({ percent }) => {
+    console.log(percent);
     return (
         <Container>
-            <BarElement />
+            <BarElement percent={percent} />
         </Container>
     );
 };

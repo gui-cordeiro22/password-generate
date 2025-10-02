@@ -31,7 +31,7 @@ export const HomePage: FunctionComponent = () => {
         Símbolos: symbolsChars,
     };
 
-    const { handlePasswordGenerate, generatedPassword } = usePasswordGenerate();
+    const { handlePasswordGenerate, generatedPassword, securityPercent } = usePasswordGenerate();
 
     const passwordChars = useMemo(() => {
         return [defaultChars, ...selectedOption.map((variant) => charVariants[variant] ?? "")].join("");
@@ -51,7 +51,7 @@ export const HomePage: FunctionComponent = () => {
 
     useEffect(() => {
         handlePasswordGenerate(passwordLength, passwordChars);
-    }, [passwordChars]);
+    }, [passwordChars, securityPercent]);
 
     return (
         <Home
@@ -61,7 +61,7 @@ export const HomePage: FunctionComponent = () => {
                     value={generatedPassword}
                     copyButtonElementCompositions={<Copy onClick={() => copyToClipboard(generatedPassword)} />}
                     regenerateButtonElementCompositions={<RefreshCcw onClick={() => handlePasswordGenerate(passwordLength, passwordChars)} />}
-                    progressBarElementCompositions={<ProgressBar />}
+                    progressBarElementCompositions={<ProgressBar percent={securityPercent} />}
                 />
             }
             customPasswordOptionsCompositions={
