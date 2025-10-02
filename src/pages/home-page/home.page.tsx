@@ -1,5 +1,5 @@
 // Dependencies
-import { FunctionComponent, useEffect, useState } from "react";
+import { FunctionComponent, useCallback, useEffect, useMemo, useState } from "react";
 
 // Components
 import { Home } from "../../components/pages/home";
@@ -19,26 +19,39 @@ import { usePasswordGenerate } from "../../hooks/use-password-generate";
 // Utils
 import { data } from "./home.data";
 import { copyToClipboard } from "../../utils/copy";
+import { defaultChars, numbersChars, symbolsChars, uppercaseChars } from "../../utils/constants";
 
 export const HomePage: FunctionComponent = () => {
     const [passwordLength, setPasswordLength] = useState<number>(16);
-    const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
+    const [selectedOption, setSelectedOption] = useState<string[]>([]);
+
+    const charVariants: Record<string, string> = {
+        Maiúsculas: uppercaseChars,
+        Números: numbersChars,
+        Símbolos: symbolsChars,
+    };
 
     const { handlePasswordGenerate, generatedPassword } = usePasswordGenerate();
 
-    const handleRangeChange = (value: number) => {
-        setPasswordLength(value);
+    const passwordChars = useMemo(() => {
+        return [defaultChars, ...selectedOption.map((variant) => charVariants[variant] ?? "")].join("");
+    }, [selectedOption]);
 
-        handlePasswordGenerate(value);
-    };
+    const handleCheckboxChange = useCallback((option: string) => {
+        setSelectedOption((prev) => (prev.includes(option) ? prev.filter((v) => v !== option) : [...prev, option]));
+    }, []);
 
-    const handleCheckboxChange = (value: string) => {
-        setSelectedOptions((prev) => (prev.includes(value) ? prev.filter((v) => v !== value) : [...prev, value]));
-    };
+    const handleRangeChange = useCallback(
+        (value: number) => {
+            setPasswordLength(value);
+            handlePasswordGenerate(value, passwordChars);
+        },
+        [passwordChars, handlePasswordGenerate]
+    );
 
     useEffect(() => {
-        handlePasswordGenerate(passwordLength);
-    }, []);
+        handlePasswordGenerate(passwordLength, passwordChars);
+    }, [passwordChars]);
 
     return (
         <Home
@@ -47,7 +60,7 @@ export const HomePage: FunctionComponent = () => {
                 <InputText
                     value={generatedPassword}
                     copyButtonElementCompositions={<Copy onClick={() => copyToClipboard(generatedPassword)} />}
-                    regenerateButtonElementCompositions={<RefreshCcw onClick={() => handlePasswordGenerate(passwordLength)} />}
+                    regenerateButtonElementCompositions={<RefreshCcw onClick={() => handlePasswordGenerate(passwordLength, passwordChars)} />}
                     progressBarElementCompositions={<ProgressBar />}
                 />
             }
@@ -61,7 +74,7 @@ export const HomePage: FunctionComponent = () => {
                             label={option.label}
                             key={`option-${index}`}
                             value={option.label}
-                            checked={selectedOptions.includes(option.label)}
+                            checked={selectedOption.includes(option.label)}
                             checkedIconElement={<Check size={10} color="#fff" />}
                             handleChange={() => {
                                 handleCheckboxChange(option.label);
