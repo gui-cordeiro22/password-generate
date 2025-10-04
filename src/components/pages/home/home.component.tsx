@@ -4,18 +4,12 @@ import { Fragment, FunctionComponent } from "react";
 // Types
 import { HomeProps } from "./home.types";
 
-export const Home: FunctionComponent<HomeProps> = ({
-    headerSectionCompositions,
-    passwordVisualizerCompositions,
-    customPasswordOptionsCompositions,
-    copyPasswordButtonCompositions,
-}) => {
+export const Home: FunctionComponent<HomeProps> = ({ headerSectionCompositions, passwordSettingsSectionsCompositions }) => {
     return (
         <Fragment>
             {headerSectionCompositions}
-            {passwordVisualizerCompositions}
-            {customPasswordOptionsCompositions}
-            {copyPasswordButtonCompositions}
+
+            {passwordSettingsSectionsCompositions}
         </Fragment>
     );
 };

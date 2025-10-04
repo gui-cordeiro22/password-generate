@@ -20,6 +20,7 @@ import { usePasswordGenerate } from "../../hooks/use-password-generate";
 import { data } from "./home.data";
 import { copyToClipboard } from "../../utils/copy";
 import { defaultChars, numbersChars, symbolsChars, uppercaseChars } from "../../utils/constants";
+import { PasswordSettings } from "../../components/sections/password-settings";
 
 export const HomePage: FunctionComponent = () => {
     const [passwordLength, setPasswordLength] = useState<number>(16);
@@ -56,34 +57,40 @@ export const HomePage: FunctionComponent = () => {
     return (
         <Home
             headerSectionCompositions={<Header title={data.headerSection.title} description={data.headerSection.description} />}
-            passwordVisualizerCompositions={
-                <InputText
-                    value={generatedPassword}
-                    copyButtonElementCompositions={<Copy onClick={() => copyToClipboard(generatedPassword)} />}
-                    regenerateButtonElementCompositions={<RefreshCcw onClick={() => handlePasswordGenerate(passwordLength, passwordChars)} />}
-                    progressBarElementCompositions={<ProgressBar percent={securityPercent} />}
-                />
-            }
-            customPasswordOptionsCompositions={
-                <CustomPasswordOptions
-                    title={data.customPasswordOptionsSection.title}
-                    passwordLengthLabel={`${data.customPasswordOptionsSection.passwordLengthLabel} ${passwordLength}`}
-                    inputRangeElementCompositions={<InputRange handleChange={handleRangeChange} defaultValue={passwordLength} />}
-                    optionsElements={data.customPasswordOptionsSection.passwordOptions.map((option, index) => (
-                        <Checkbox
-                            label={option.label}
-                            key={`option-${index}`}
-                            value={option.label}
-                            checked={selectedOption.includes(option.label)}
-                            checkedIconElement={<Check size={10} color="#fff" />}
-                            handleChange={() => {
-                                handleCheckboxChange(option.label);
-                            }}
+            passwordSettingsSectionsCompositions={
+                <PasswordSettings
+                    passwordVisualizerCompositions={
+                        <InputText
+                            value={generatedPassword}
+                            copyButtonElementCompositions={<Copy onClick={() => copyToClipboard(generatedPassword)} />}
+                            regenerateButtonElementCompositions={<RefreshCcw onClick={() => handlePasswordGenerate(passwordLength, passwordChars)} />}
+                            progressBarElementCompositions={<ProgressBar percent={securityPercent} />}
                         />
-                    ))}
+                    }
+                    customPasswordOptionsCompositions={
+                        <CustomPasswordOptions
+                            title={data.customPasswordOptionsSection.title}
+                            passwordLengthLabel={`${data.customPasswordOptionsSection.passwordLengthLabel} ${passwordLength}`}
+                            inputRangeElementCompositions={<InputRange handleChange={handleRangeChange} defaultValue={passwordLength} />}
+                            optionsElements={data.customPasswordOptionsSection.passwordOptions.map((option, index) => (
+                                <Checkbox
+                                    label={option.label}
+                                    key={`option-${index}`}
+                                    value={option.label}
+                                    checked={selectedOption.includes(option.label)}
+                                    checkedIconElement={<Check size={10} color="#fff" />}
+                                    handleChange={() => {
+                                        handleCheckboxChange(option.label);
+                                    }}
+                                />
+                            ))}
+                        />
+                    }
+                    copyPasswordButtonCompositions={
+                        <Button label={data.actionButtons.label} handleClick={() => copyToClipboard(generatedPassword)} />
+                    }
                 />
             }
-            copyPasswordButtonCompositions={<Button label={data.actionButtons.label} handleClick={() => copyToClipboard(generatedPassword)} />}
         />
     );
 };

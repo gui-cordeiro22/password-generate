@@ -12,46 +12,42 @@ export const Container = styled.div`
     border-radius: 8px;
     gap: 16px;
     width: 100%;
-    max-width: 768px;
-
     padding: 24px;
-    margin: 24px auto;
 
     @media (min-width: 768px) {
-        max-width: 677px;
         padding: 40px;
-        margin: 40px auto;
     }
 
     @media (min-width: 1024px) {
-        max-width: 972px;
         padding: 80px 40px;
-        margin: 80px auto;
     }
 
     @media (min-width: 1366px) {
-        max-width: 1226px;
         padding: 80px 76px;
-    }
-
-    @media (min-width: 1920px) {
-        max-width: 1440px;
     }
 `;
 
 export const ContentWrapper = styled.div`
     display: flex;
     flex-direction: row;
-    align-items: flex-start;
+    align-items: center;
     justify-content: center;
-    gap: 24px;
+    gap: 20px;
     width: 100%;
+
+    @media (min-width: 768px) {
+        align-items: flex-start;
+    }
 `;
 
 export const Title = styled.h2`
     font-family: "Montserrat", sans-serif;
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: bold;
+
+    @media (min-width: 768px) {
+        font-size: 2rem;
+    }
 `;
 
 export const Divider = styled.div`
