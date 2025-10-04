@@ -1,5 +1,6 @@
 // Dependencies
 import { Fragment, FunctionComponent } from "react";
+import { ToastContainer } from "react-toastify";
 
 // Pages
 import HomePage from "./pages/home-page";
@@ -11,6 +12,8 @@ export const App: FunctionComponent = () => {
     return (
         <Fragment>
             <GlobalStyle />
+
+            <ToastContainer theme="light" position="bottom-right" limit={1} />
 
             <HomePage />
         </Fragment>

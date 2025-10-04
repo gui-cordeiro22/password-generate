@@ -2,7 +2,7 @@
 import { FunctionComponent } from "react";
 
 // Styles
-import { Container } from "./password-settings.styles";
+import { ButtonWrapper, Container } from "./password-settings.styles";
 
 // Types
 import { PasswordSettingsProps } from "./password-settings.types";
@@ -18,7 +18,7 @@ export const PasswordSettings: FunctionComponent<PasswordSettingsProps> = ({
 
             {customPasswordOptionsCompositions}
 
-            {copyPasswordButtonCompositions}
+            <ButtonWrapper>{copyPasswordButtonCompositions}</ButtonWrapper>
         </Container>
     );
 };

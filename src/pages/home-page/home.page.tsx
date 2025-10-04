@@ -9,6 +9,7 @@ import { Button } from "../../components/elements/button";
 import { ProgressBar } from "../../components/elements/progress-bar";
 import { CustomPasswordOptions } from "../../components/sections/custom-password-options";
 import { Checkbox } from "../../components/elements/checkbox";
+import { PasswordSettings } from "../../components/sections/password-settings";
 
 // Assets
 import { Check, Copy, RefreshCcw } from "lucide-react";
@@ -20,7 +21,6 @@ import { usePasswordGenerate } from "../../hooks/use-password-generate";
 import { data } from "./home.data";
 import { copyToClipboard } from "../../utils/copy";
 import { defaultChars, numbersChars, symbolsChars, uppercaseChars } from "../../utils/constants";
-import { PasswordSettings } from "../../components/sections/password-settings";
 
 export const HomePage: FunctionComponent = () => {
     const [passwordLength, setPasswordLength] = useState<number>(16);
@@ -63,7 +63,13 @@ export const HomePage: FunctionComponent = () => {
                         <InputText
                             value={generatedPassword}
                             copyButtonElementCompositions={<Copy onClick={() => copyToClipboard(generatedPassword)} />}
-                            regenerateButtonElementCompositions={<RefreshCcw onClick={() => handlePasswordGenerate(passwordLength, passwordChars)} />}
+                            regenerateButtonElementCompositions={
+                                <RefreshCcw
+                                    onClick={() => {
+                                        handlePasswordGenerate(passwordLength, passwordChars);
+                                    }}
+                                />
+                            }
                             progressBarElementCompositions={<ProgressBar percent={securityPercent} />}
                         />
                     }
